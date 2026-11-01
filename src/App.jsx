@@ -361,7 +361,10 @@ export default function App() {
               </a>
             </p>
           </div>
-          <p className="legal">All rights reserved. © 2026 AgriFuel Green Energy.</p>
+          <p className="legal">
+            <span>All rights reserved. © 2026 AgriFuel Green Energy.</span>
+            <a href="https://www.growhivemedea.com" target="_blank" rel="noreferrer">Designed by Grohive Media</a>
+          </p>
         </div>
       </footer>
     </>
