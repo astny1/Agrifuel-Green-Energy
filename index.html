@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c3b30" />
+    <meta
+      name="description"
+      content="AgriFuel Green Energy engineers smokeless eco-briquettes from agricultural waste for industrial boilers, farms, commercial kitchens and households in Zambia."
+    />
+    <title>AgriFuel Green Energy — Industrial and domestic thermal energy, Zambia</title>
+    <link rel="icon" href="./favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      var identity = document.createElement("script");
+      identity.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
+      identity.async = true;
+      identity.onload = function () {
+        if (!window.netlifyIdentity) return;
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function () {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      };
+      document.body.appendChild(identity);
+    </script>
+  </body>
+</html>

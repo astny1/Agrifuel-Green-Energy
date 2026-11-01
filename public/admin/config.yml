@@ -1,0 +1,73 @@
+# Netlify CMS, now published as Decap CMS. Same editor.
+# On Netlify: Identity + Git Gateway, then open /admin.
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: stories
+    label: Stories
+    label_singular: Story
+    description: Paste a YouTube link. It appears under Stories.
+    folder: content/stories
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date}} — {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, date_format: "D MMMM YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - { label: YouTube link, name: youtube, widget: string, hint: "A link from the channel, for example https://www.youtube.com/watch?v=…" }
+
+  - name: news
+    label: News impact
+    label_singular: News item
+    description: A news card. Publish sends it live under News impact.
+    folder: content/news
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date}} — {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, date_format: "D MMMM YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - label: Type
+        name: kind
+        widget: select
+        options: [News, Impact, Conference, Partnership, Sponsorship]
+        default: News
+      - { label: Summary, name: summary, widget: text }
+      - { label: Cover image, name: image, widget: image, required: false }
+      - { label: Story, name: body, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    description: Add, update, or delete a field deployment. Publish sends it live on the Projects page.
+    folder: content/projects
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{order}} — {{title}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Order
+        name: order
+        widget: number
+        value_type: int
+        min: 1
+        default: 1
+        hint: Lower numbers show first on the page.
+      - { label: Photo, name: image, widget: image }
+      - label: Photo focus
+        name: focus
+        widget: string
+        required: false
+        default: center
+        hint: Where the photo sits in the frame, for example center 50%.
+      - { label: Text, name: body, widget: markdown }
