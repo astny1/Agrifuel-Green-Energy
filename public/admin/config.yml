@@ -1,10 +1,8 @@
-# Netlify CMS, now published as Decap CMS. Same editor.
-# On Netlify: Identity + Git Gateway, then open /admin.
+# Editors sign in with GitHub. The account must be allowed to push this repository.
 backend:
-  name: git-gateway
+  name: github
+  repo: astny1/Agrifuel-Green-Energy
   branch: main
-
-local_backend: true
 
 media_folder: public/uploads
 public_folder: /uploads
@@ -16,6 +14,7 @@ collections:
     description: Paste a YouTube link. It appears under Stories.
     folder: content/stories
     create: true
+    delete: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     summary: "{{date}} — {{title}}"
     fields:
