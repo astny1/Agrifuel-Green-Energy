@@ -1,7 +1,5 @@
-# Editors sign in with GitHub. The account must be allowed to push this repository.
 backend:
-  name: github
-  repo: astny1/Agrifuel-Green-Energy
+  name: git-gateway
   branch: main
 
 media_folder: public/uploads
