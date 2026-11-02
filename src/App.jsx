@@ -60,6 +60,57 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const place = "Kafue Industrial Yard, Lusaka South Multi-Facility Economic Zone, New Kasama, Lusaka 10101, Zambia.";
+    const pages = {
+      home: {
+        title: "AgriFuel Green Energy | Lusaka, Zambia",
+        description: `AgriFuel Green Energy, also known as AgriFuel Energy, supplies smokeless briquettes from crop residue in Lusaka, Zambia. ${place}`,
+      },
+      about: {
+        title: "About AgriFuel Green Energy | Lusaka",
+        description: `AgriFuel Green Energy is a Lusaka company turning crop residue into smokeless briquettes for homes, farms, and industry. ${place}`,
+      },
+      products: {
+        title: "The briquette | AgriFuel Green Energy",
+        description: `The AgriFuel briquette is a smokeless solid fuel made from crop residue for homes and industry in Zambia. ${place}`,
+      },
+      solutions: {
+        title: "Where AgriFuel is used | Lusaka",
+        description: `AgriFuel Green Energy supplies smokeless briquettes for boilers, farms, kitchens, and households in Zambia. ${place}`,
+      },
+      projects: {
+        title: "Projects | AgriFuel Green Energy",
+        description: `Field use of AgriFuel Green Energy briquettes in Zambia. ${place}`,
+      },
+      sustainability: {
+        title: "Sustainability | AgriFuel Green Energy",
+        description: `AgriFuel Green Energy turns crop residue into fuel and keeps forest wood out of the fire. ${place}`,
+      },
+      media: {
+        title: "Stories and news | AgriFuel Green Energy",
+        description: `Stories and news from AgriFuel Green Energy in Lusaka, Zambia. ${place}`,
+      },
+      contact: {
+        title: "Contact AgriFuel Green Energy | Lusaka",
+        description: `Contact AgriFuel Green Energy on 0965 127 193 or customercare@agrifuelenergy.com. ${place}`,
+      },
+    };
+    let entry = pages[page] || pages.home;
+    if (page === "news" && anchor) {
+      const item = news.find((story) => story.slug === anchor);
+      if (item) {
+        entry = {
+          title: `${item.title} | AgriFuel Green Energy`,
+          description: item.summary || pages.media.description,
+        };
+      }
+    }
+    document.title = entry.title;
+    const tag = document.querySelector('meta[name="description"]');
+    if (tag) tag.setAttribute("content", entry.description);
+  }, [page, anchor]);
+
+  useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mediaQuery.matches || page !== "home") return undefined;
     const timer = window.setInterval(() => {
@@ -1372,11 +1423,18 @@ function ContactPage({
 }
 
 function Address({ className = "address" }) {
+  const query = encodeURIComponent(contact.address.join(", "));
   return (
     <address className={className}>
-      {contact.address.map((line) => (
-        <span key={line}>{line}</span>
-      ))}
+      <a
+        href={`https://www.google.com/maps/search/?api=1&query=${query}`}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {contact.address.map((line) => (
+          <span key={line}>{line}</span>
+        ))}
+      </a>
     </address>
   );
 }
