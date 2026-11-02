@@ -394,18 +394,27 @@ export default function App() {
           <div>
             <h2>Contact</h2>
             <Address />
-            {contact.phoneDisplay ? (
-              <p>
-                <a href={`tel:${contact.phoneDisplay.replace(/\s/g, "")}`}>{contact.phoneDisplay}</a>
-              </p>
-            ) : (
-              <p>Talk to us from the contact page.</p>
-            )}
-            {contact.email ? (
-              <p>
-                <a href={`mailto:${contact.email}`}>{contact.email}</a>
-              </p>
-            ) : null}
+            <dl className="reach">
+              {contact.phoneDisplay ? (
+                <div>
+                  <dt>Phone</dt>
+                  <dd>
+                    <a href={`tel:${contact.phoneDisplay.replace(/\s/g, "")}`}>{contact.phoneDisplay}</a>
+                  </dd>
+                </div>
+              ) : null}
+              {contact.email ? (
+                <div>
+                  <dt>Email</dt>
+                  <dd>
+                    <a href={`mailto:${contact.email}`}>
+                      {contact.email.split("@")[0]}@<wbr />
+                      {contact.email.split("@")[1]}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+            </dl>
             <p>
               <a href={contact.profile} target="_blank" rel="noreferrer">
                 Company profile
@@ -1248,12 +1257,23 @@ function ContactPage({
             </p>
             <p className="quote-aside">Tell us the sector and the fuel you need. We reply to arrange supply.</p>
             <Address className="address quote-aside" />
-            <p className="quote-aside">
-              <a href={`tel:${contact.phoneDisplay.replace(/\s/g, "")}`}>{contact.phoneDisplay}</a>
-            </p>
-            <p className="quote-aside">
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
-            </p>
+            <dl className="reach reach-card">
+              <div>
+                <dt>Phone</dt>
+                <dd>
+                  <a href={`tel:${contact.phoneDisplay.replace(/\s/g, "")}`}>{contact.phoneDisplay}</a>
+                </dd>
+              </div>
+              <div>
+                <dt>Email</dt>
+                <dd>
+                  <a href={`mailto:${contact.email}`}>
+                    {contact.email.split("@")[0]}@<wbr />
+                    {contact.email.split("@")[1]}
+                  </a>
+                </dd>
+              </div>
+            </dl>
           </div>
           <form className="supply-form" onSubmit={submitOrder}>
             <div className="supply-fields">
