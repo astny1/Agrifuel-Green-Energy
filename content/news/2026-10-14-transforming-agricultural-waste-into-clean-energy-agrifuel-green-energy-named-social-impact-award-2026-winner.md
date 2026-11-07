@@ -27,4 +27,6 @@ As part of this milestone achievement, our team is preparing to travel to Podgor
 
 This award is not just a win for AgriFuel Green Energy—it is a testament to the power of youth-led innovation in driving Africa’s green transition. We extend our sincere gratitude to the Social Impact Award organizers, our regional mentors, our dedicated team, and every community member who supported our vision.
 
-As we expand our impact, we invite partners, investors, and stakeholders to join us in scaling clean, accessible energy across Zambia and beyond. Together, we are turning agricultural waste into a catalyst for sustainable development.
+As we expand our impact, we invite partners, investors, and stakeholders to join us in scaling clean, accessible energy across Zambia and beyond. Together, we are turning agricultural waste into a catalyst for sustainable development.\
+\
+Source: Social Innovation Academy
