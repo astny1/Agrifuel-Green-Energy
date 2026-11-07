@@ -1176,44 +1176,68 @@ function StoryList({ items }) {
 }
 
 function VideoList({ items }) {
+  const [playing, setPlaying] = useState("");
   if (!items.length) {
     return <p className="story-empty">Coming soon</p>;
   }
   return (
     <ul className="story-cards">
-      {items.map((item) => (
-        <li key={item.slug}>
-          <a className="story-card" href={item.watch} target="_blank" rel="noreferrer">
-            <div className="story-card-pic">
-              <img src={item.thumb} alt="" />
-              <span className="video-play" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M9 7.5v9l8-4.5-8-4.5z" />
-                </svg>
-              </span>
-            </div>
-            <div className="story-card-text">
-              {item.date ? (
-                <span className="story-card-date">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="3.5" y="5" width="17" height="15.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                    <path d="M3.5 10h17M8 3v4M16 3v4" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                  </svg>
-                  <span>{formatStoryCardDate(item.date)}</span>
-                </span>
-              ) : null}
-              <p className="story-card-kind">Video</p>
-              <h3>{item.title}</h3>
-              <span className="story-card-more">
-                Watch
-                <svg viewBox="0 0 16 16" aria-hidden="true">
-                  <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.4" />
-                </svg>
-              </span>
-            </div>
-          </a>
-        </li>
-      ))}
+      {items.map((item) => {
+        const on = playing === item.slug;
+        return (
+          <li key={item.slug}>
+            <article className={`story-card video-card${on ? " playing" : ""}`}>
+              <div className="story-card-pic">
+                {on ? (
+                  <iframe
+                    src={`${item.embed}&autoplay=1`}
+                    title={item.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  <>
+                    <img src={item.thumb} alt="" />
+                    <button type="button" className="video-play" aria-label={`Play ${item.title}`} onClick={() => setPlaying(item.slug)}>
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 7.5v9l8-4.5-8-4.5z" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
+              <div className="story-card-text">
+                {item.date ? (
+                  <span className="story-card-date">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="3.5" y="5" width="17" height="15.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                      <path d="M3.5 10h17M8 3v4M16 3v4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    </svg>
+                    <span>{formatStoryCardDate(item.date)}</span>
+                  </span>
+                ) : null}
+                <p className="story-card-kind">Video</p>
+                <h3>{item.title}</h3>
+                {on ? (
+                  <a className="story-card-more" href={item.watch} target="_blank" rel="noreferrer">
+                    YouTube
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                    </svg>
+                  </a>
+                ) : (
+                  <button type="button" className="story-card-more" onClick={() => setPlaying(item.slug)}>
+                    Watch
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            </article>
+          </li>
+        );
+      })}
     </ul>
   );
 }

@@ -46,6 +46,7 @@ export const videos = readPosts(files)
       youtubeId: id,
       thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
       watch: `https://www.youtube.com/watch?v=${id}`,
+      embed: `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`,
     };
   })
   .filter(Boolean);

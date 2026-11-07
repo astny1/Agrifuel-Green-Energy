@@ -1299,6 +1299,7 @@ textarea:focus-visible {
 .story-card:hover::before { background: var(--green); }
 .story-card-pic {
   position: relative;
+  z-index: 1;
   overflow: hidden;
   height: 0;
   padding-bottom: 65.9%;
@@ -1313,6 +1314,15 @@ textarea:focus-visible {
   transition: transform 0.5s linear;
 }
 .story-card:hover .story-card-pic img { transform: scale(1.05); }
+.story-card-pic iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+.video-card { text-decoration: none; }
 .video-play {
   position: absolute;
   left: 50%;
@@ -1324,10 +1334,14 @@ textarea:focus-visible {
   width: 52px;
   height: 52px;
   margin: -26px 0 0 -26px;
+  padding: 0;
+  border: 0;
   border-radius: 50%;
   background: rgba(12, 59, 48, 0.9);
   color: #fff;
+  cursor: pointer;
 }
+.video-play:hover { background: #0f6a3c; }
 .video-play svg { width: 22px; height: 22px; fill: currentColor; }
 .story-card-text { position: relative; padding: 35px 26px; }
 .story-card-date {
@@ -1369,9 +1383,15 @@ textarea:focus-visible {
 .story-card-more {
   display: inline-flex;
   align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
   color: var(--green);
   font-size: 12px;
   line-height: 1;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
 }
 .story-card-more svg { width: 14px; height: 14px; margin-left: 9px; }
 .story-fallback { background: var(--bg-alt); }
